@@ -15,9 +15,15 @@ const ArticlePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch(`http://localhost:8000/api/articles/${name}`);
-      const body = await result.json();
-      setArticleInfo(body);
+      try {
+        const result = await fetch(
+          `http://localhost:8000/api/articles/${name}`
+        );
+        const body = await result.json();
+        setArticleInfo(body);
+      } catch (error) {
+        console.log(`Server error: ${error}`);
+      }
     };
     fetchData();
   }, [name]);
